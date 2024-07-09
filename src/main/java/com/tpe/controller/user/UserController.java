@@ -23,10 +23,10 @@ public class UserController {
     private final UserService userService;
     private final UserHelper userHelper;
 
-
+//todo userSave 09/07/2024
 
    /* //NOT: register()
-    @PostMapping("/register") //TODO Whiteliste ekle
+    @PostMapping("/register")
     public ResponseMessage<UserResponse> register (
             @RequestBody @Valid UserRequest userRequest){
 

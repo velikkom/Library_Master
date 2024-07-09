@@ -16,11 +16,23 @@ import java.util.Set;
 
 public class LoanResponse {
 
-    private Long id;
+   /* private Long id;
     private Long userId;
+    private Book book;
     private LocalDateTime loanDate;
     private LocalDateTime expireDate;
     private LocalDateTime returnDate;
-    private Set<Book> bookList;
+    private Set<Book> bookList;*/
+
+
+    private Long id;
+    private Long userId;
+    private Long bookId;
+    private Book book;
+    private LocalDateTime loanDate;
+    private LocalDateTime expireDate;
+    private LocalDateTime returnDate;
+
+
 
 }
