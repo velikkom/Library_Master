@@ -1,5 +1,7 @@
 package com.tpe.entity.business;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,18 +29,21 @@ public class Book {
 
     private Integer pageCount;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "authorId", nullable = false)
+    @JsonIgnore
     private Author author;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "publisherId", nullable = false)
+    @JsonIgnore
     private Publisher publisher;
 
     private Integer publishDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoryId", nullable = false)
+    @JsonBackReference
     private Category category;
 
     @Lob

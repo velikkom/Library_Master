@@ -157,38 +157,6 @@ public class BookService {
 
 
 
-    /*public Book updateBook(BookRequest bookRequest, Long id) {
-      ValidationUtil.validateName(bookRequest.getName());
-      ValidationUtil.validateISBN(bookRequest.getIsbn());
-      validateShelfCode(bookRequest.getShelfCode());
 
-      Optional<Book> existingBookOptional = bookRepository.findById(id);
-      ValidationUtil.checkIfExists(existingBookOptional,"Book");
-
-      Book existingBook = existingBookOptional.get();
-        existingBook.setName(bookRequest.getName());
-        existingBook.setIsbn(bookRequest.getIsbn());
-        existingBook.setPageCount(bookRequest.getPageCount());
-        existingBook.setPublishDate(bookRequest.getPublishDate());
-        existingBook.setImage(bookRequest.getImage());
-        existingBook.setShelfCode(bookRequest.getShelfCode());
-        existingBook.setActive(bookRequest.isActive());
-        existingBook.setFeatured(bookRequest.isFeatured());
-
-        Author author = authorRepository.findById(bookRequest.getAuthorId())
-                .orElseThrow(() -> new IllegalArgumentException("Author not found"));
-        existingBook.setAuthor(author);
-
-        Publisher publisher = publisherRepository.findById(bookRequest.getPublisherId())
-                .orElseThrow(() -> new IllegalArgumentException("Publisher not found"));
-        existingBook.setPublisher(publisher);
-
-        Category category = categoryRepository.findById(bookRequest.getCategoryId())
-                .orElseThrow(() -> new IllegalArgumentException("Category not found"));
-        existingBook.setCategory(category);
-
-        return bookRepository.save(existingBook);
-
-    }*/
 }
 

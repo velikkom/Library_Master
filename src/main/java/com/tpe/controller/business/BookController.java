@@ -45,7 +45,7 @@ public class BookController
        return ResponseEntity.ok(book);
     }
 
-   //http://localhost:8080/publishers/save +POST + json
+   //http://localhost:8080/books/save +POST + json
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/save")
     public ResponseEntity<BookResponse> createBook(@Valid @RequestBody BookRequest bookRequest) {
@@ -53,7 +53,7 @@ public class BookController
         return new ResponseEntity<>(bookResponse, HttpStatus.CREATED);
     }
 
-    //localhost:8080/publishers/update/1 +POST + json
+    //localhost:8080/books/update/1 +POST + json
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<Book> updateBook(@Valid @PathVariable Long id,
