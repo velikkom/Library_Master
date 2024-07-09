@@ -1,5 +1,7 @@
 package com.tpe.controller.user;
 
+import com.tpe.entity.user.User;
+import com.tpe.payload.mapper.UserMapper;
 import com.tpe.payload.request.user.SaveUserRequest;
 import com.tpe.payload.request.user.UserRequest;
 import com.tpe.payload.request.user.UserSignIn;
@@ -9,6 +11,7 @@ import com.tpe.payload.response.user.UserSignInResponse;
 import com.tpe.service.helper.UserHelper;
 import com.tpe.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,48 +25,21 @@ public class UserController {
 
     private final UserService userService;
     private final UserHelper userHelper;
-
-//todo userSave 09/07/2024
-
-   /* //NOT: register()
-    @PostMapping("/register")
-    public ResponseMessage<UserResponse> register (
-            @RequestBody @Valid UserRequest userRequest){
-
-        return userService.register(userRequest);
-    }
-
-    //NOT: member-employee-admin için giren kişinin bilgilerini getirecek
-    @PreAuthorize("hasAnyAuthority('MEMBER','ADMIN','EMPLOYEE')")
-    @PostMapping("/authUser")
-    public ResponseMessage<UserResponse> getAuthenticatedUser(HttpServletRequest servletRequest){
-
-        return userService.getAuthenticatedUser(servletRequest);
-    }
-
-    //NOT: getUserLoans() It will return authenticated user loans
-//    @PreAuthorize("hasAnyAuthority('MEMBER','ADMIN','EMPLOYEE')")
-//    @PostMapping("/user/loans")
-//    public ResponseMessage<UserWithLoans> getUserLoans(
-//            @RequestParam (value = "page", defaultValue = "0") int page,
-//            @RequestParam (value = "size", defaultValue = "20") int size,
-//            @RequestParam (value = "sort", defaultValue = "createDate") String sort,
-//            @RequestParam (value = "type", defaultValue = "desc") String type){
-//
-//
-//    }
+    private final UserMapper userMapper;
 
 
-    //NOT: saveUser()
+    //http://localhost:8080/users/saveUser + json +'MEMBER','ADMIN','EMPLOYEE'
     @PreAuthorize("hasAnyAuthority('MEMBER','ADMIN','EMPLOYEE')")
     @PostMapping("/saveUser")
-    public ResponseMessage<UserResponse> saveUser(
-            @RequestBody @Valid SaveUserRequest saveUserRequest,
-            HttpServletRequest servletRequest){
+    public ResponseEntity<UserResponse> saveUser(
+            @RequestBody @Valid UserRequest userRequest)
+    {
 
-        return userService.saveUser(saveUserRequest,servletRequest);
+       User user = userService.saveUser(userRequest);
+       UserResponse userResponse = userMapper.toResponse(user);
+       return ResponseEntity.ok(userResponse);
     }
-*/
+
 
 
 
