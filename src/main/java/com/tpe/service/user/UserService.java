@@ -6,8 +6,11 @@ import com.tpe.entity.user.Role;
 import com.tpe.payload.mapper.UserMapper;
 import com.tpe.payload.request.user.SaveUserRequest;
 import com.tpe.payload.request.user.UserRequest;
+import com.tpe.payload.response.user.UserResponse;
 import com.tpe.repository.user.UserRepository;
 import com.tpe.repository.user.UserRoleRepository;
+import com.tpe.service.helper.ValidationUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,20 +21,24 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserRoleService userRoleService;
     private final UserRoleRepository userRoleRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
+    private final ValidationUtil validationUtil;
 
-    public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder, UserMapper userMapper) {
-        this.userRepository = userRepository;
-        this.userRoleRepository = userRoleRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.userMapper = userMapper;
-    }
+//    public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder, UserMapper userMapper) {
+//        this.userRepository = userRepository;
+//        this.userRoleRepository = userRoleRepository;
+//        this.passwordEncoder = passwordEncoder;
+//        this.userMapper = userMapper;
+//    }
 
     public long countAllAdmins() {
         Role adminRole = userRoleRepository.findByRoleType(RoleType.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Admin role not found"));
@@ -58,20 +65,30 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public UserResponse saveUser(UserRequest userRequest)
+    {
+        validationUtil.checkDublicate(userRequest.getEmail(), userRequest.getPassword());
 
-    public User saveUser(UserRequest userRequest) {
-        // Check user already registered or not
-        Optional<User> existingUser = userRepository.findByEmail(userRequest.getEmail());
-        if (existingUser.isPresent()) {
-            throw new IllegalArgumentException("User with this email already exists");
-        }
-
-        // UserRequest'den User entity
-        User user = userMapper.toEntity(userRequest);
-
-        // save user to db
-        return userRepository.save(user);
+        User member = userMapper.toEntity(userRequest);
+        member.setRoles(userRoleService.getUserRole(RoleType.ROLE_EMPLOYEE));
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
+        return userRepository.save(this::saveUser);//todo burda kaldım
     }
+
+
+//    public User saveUser(UserRequest userRequest) {
+//        // Check user already registered or not
+//        Optional<User> existingUser = userRepository.findByEmail(userRequest.getEmail());
+//        if (existingUser.isPresent()) {
+//            throw new IllegalArgumentException("User with this email already exists");
+//        }
+//
+//        // UserRequest'den User entity
+//        User user = userMapper.toEntity(userRequest);
+//
+//        // save user to db
+//        return userRepository.save(user);
+//    }
 
 
 }

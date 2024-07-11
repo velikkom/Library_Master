@@ -30,6 +30,14 @@ public class UserController {
 
     //http://localhost:8080/users/saveUser + json +'MEMBER','ADMIN','EMPLOYEE'
     @PreAuthorize("hasAnyAuthority('MEMBER','ADMIN','EMPLOYEE')")
+    @PostMapping("/save")
+    public ResponseEntity<UserResponse> saveMember(@RequestBody @Valid UserRequest userRequest)
+    {
+      return ResponseEntity.ok  (userService.saveUser(userRequest));
+    }
+
+
+   /* @PreAuthorize("hasAnyAuthority('MEMBER','ADMIN','EMPLOYEE')")
     @PostMapping("/saveUser")
     public ResponseEntity<UserResponse> saveUser(
             @RequestBody @Valid UserRequest userRequest)
@@ -38,7 +46,7 @@ public class UserController {
        User user = userService.saveUser(userRequest);
        UserResponse userResponse = userMapper.toResponse(user);
        return ResponseEntity.ok(userResponse);
-    }
+    }*/
 
 
 

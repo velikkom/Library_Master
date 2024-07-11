@@ -1,5 +1,8 @@
 package com.tpe.service.helper;
 
+import com.tpe.exception.ConflictException;
+import com.tpe.payload.messages.ErrorMessages;
+import com.tpe.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -8,6 +11,9 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class ValidationUtil {
+
+    private final UserRepository userRepository;
+
     public static void validateName(String name) {
         if (name == null || name.trim().isEmpty()) {
             throw new IllegalArgumentException("Name cannot be empty");
@@ -36,6 +42,13 @@ public class ValidationUtil {
     public static <T> void checkIfExistsisEmpty(Optional<T> existingEntity, String entityName) {
         if (existingEntity.isEmpty()) {
             throw new IllegalArgumentException(entityName + " does not exist");
+        }
+    }
+    public void checkDublicate(String email,String password)
+    {
+        if (userRepository.existsByEmail(email))
+        {
+            throw new ConflictException(String.format(ErrorMessages.USER_ALREADY_EXISTS,email));
         }
     }
 

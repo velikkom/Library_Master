@@ -8,7 +8,7 @@ public class ErrorMessages {
     public static final String BOOK_NOT_FOUND = "Book does not exist with id %s";
     public static final String LOAN_NOT_FOUND = "Loan does not exist with id %s";
     public static final String BOOK_ALREADY_EXISTS = "Book already exists with isbn %s";
-    public static final String USER_ALREADY_EXISTS = "User already exists with email %s";
+    public static final String USER_ALREADY_EXISTS = "User already exists with email %s email";
     public static final String AUTHOR_NOT_FOUND = "Authors does not exists";
     public static final String PUBLISHER_NOT_FOUND = "Publisher does not exists with id %s";
     public static final String PUBLISHER_NOT_FOUND_WITH_NAME = "Publisher does not exists with name %s";
