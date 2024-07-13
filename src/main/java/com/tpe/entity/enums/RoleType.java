@@ -3,8 +3,14 @@ package com.tpe.entity.enums;
 import lombok.Getter;
 
 
-//@Getter
+@Getter
 public enum RoleType {
+
+    ROLE_ADMIN,
+    ROLE_MEMBER,
+    ROLE_EMPLOYEE
+
+}
     /*MEMBER("MEMBER"),
     EMPLOYEE("EMPLOYEE"),
     ADMIN("ADMIN");
@@ -15,8 +21,3 @@ public enum RoleType {
         this.name=name;
     }
 */
-    ROLE_ADMIN,
-    ROLE_MEMBER,
-    ROLE_EMPLOYEE
-
-}

@@ -76,7 +76,7 @@ public class LibraryApplication implements CommandLineRunner {
 			userService.saveAdmin(adminRequest);
 		}
 
-		if (userRepository.countAllAdmins() == 0) {
+		/*if (userRepository.countAllAdmins() == 0) {
 			User adminUser = new User();
 			adminUser.setEmail("admin@example.com");
 			adminUser.setPassword(passwordEncoder.encode("adminpassword"));
@@ -88,6 +88,6 @@ public class LibraryApplication implements CommandLineRunner {
 			adminUser.setPhone("123-456-7890");
 			adminUser.setCreateDate(LocalDateTime.now());
 			userRepository.save(adminUser);
-		}
+		}*/
 	}
 }

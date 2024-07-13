@@ -65,15 +65,15 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public UserResponse saveUser(UserRequest userRequest)
+   /* public UserResponse saveUser(UserRequest userRequest)
     {
         validationUtil.checkDublicate(userRequest.getEmail(), userRequest.getPassword());
 
         User member = userMapper.toEntity(userRequest);
         member.setRoles(userRoleService.getUserRole(RoleType.ROLE_EMPLOYEE));
         member.setPassword(passwordEncoder.encode(member.getPassword()));
-        return userRepository.save(this::saveUser);//todo burda kaldım
-    }
+        return userRepository.save();//todo burda kaldım
+    }*/
 
 
 //    public User saveUser(UserRequest userRequest) {

@@ -28,13 +28,13 @@ public class UserController {
     private final UserMapper userMapper;
 
 
-    //http://localhost:8080/users/saveUser + json +'MEMBER','ADMIN','EMPLOYEE'
-    @PreAuthorize("hasAnyAuthority('MEMBER','ADMIN','EMPLOYEE')")
+    /*//http://localhost:8080/users/saveUser + json +'ADMIN','EMPLOYEE'
+    @PreAuthorize("hasAnyAuthority('ADMIN','EMPLOYEE')")
     @PostMapping("/save")
     public ResponseEntity<UserResponse> saveMember(@RequestBody @Valid UserRequest userRequest)
     {
       return ResponseEntity.ok  (userService.saveUser(userRequest));
-    }
+    }*/
 
 
    /* @PreAuthorize("hasAnyAuthority('MEMBER','ADMIN','EMPLOYEE')")
